@@ -10,7 +10,7 @@ Running CASTLE on CUDA is recommended if available.
     pip install castle
 
 ## Tutorial
-We also provide a [quick-start notebook](https://github.com/xy-chen16/EpiAnno/blob/master/code/demo.ipynb) for the training, evaluation, visualization and feature spectrum of CASTLE.
+We also provide a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/demo.ipynb) for the training, evaluation, visualization and feature spectrum of CASTLE.
 
 ### Input   
 * h5ad file
