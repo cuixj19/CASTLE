@@ -86,7 +86,5 @@ Output will be saved in the output folder including:
 * **adata.h5ad**:  saved data including latent embeddings, clustering assignments and UMAP results.
 * **results.csv**:  saved performance evaluation of clustering assignments and ground-truth cell type labels.
 
-## Citation
-We are working on the CASTLE manuscript...
 ## Contact 
 If you have any questions, you can contact me from the email: <cuixj19@mails.tsinghua.edu.cn>
