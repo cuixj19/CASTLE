@@ -1,4 +1,4 @@
-# Single-cell Chromatin Accessibility Sequencing data analysis via discreTe Latent Embedding
+# single-cell Chromatin Accessibility Sequencing data analysis via discreTe Latent Embedding
 
 ![](docs/CASTLE.png)
 
