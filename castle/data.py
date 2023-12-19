@@ -6,6 +6,7 @@ import scipy
 from scipy.sparse import issparse
 import torch
 from torch.utils.data import Dataset, DataLoader
+from torch.utils.data.sampler import Sampler
 from anndata import AnnData
 import scanpy as sc
 import episcanpy.api as epi
@@ -96,7 +97,7 @@ def load_data(
             min_cells=min_cells, 
             log=log, 
         )
-        # adata.write(outdir+'adata_preprocessed.h5ad', compression='gzip')
+        adata.write(outdir+'adata_preprocessed.h5ad', compression='gzip')
     
     if log: log.info('Number of cell types: {}'.format(len(adata.obs['cell_type'].cat.categories)))
     if log: log.info('Number of batches: {}'.format(len(adata.obs['batch'].cat.categories)))
@@ -117,9 +118,10 @@ def load_data(
         shuffle=True, 
         num_workers=8
     )
+    batch_sampler = BatchSampler(batch_size, adata.obs['batch'], drop_last=False)
     testloader = DataLoader(
         scdata, 
-        batch_size=batch_size
+        batch_sampler=batch_sampler
     )
     return adata, trainloader, testloader
 
@@ -265,6 +267,14 @@ def cal_tfidf(adata, chunk_size=10000):
     adata.X = scipy.sparse.csr_matrix(adata.X)
     return adata
 
+def cal_tfidf1(adata):
+    a = np.sum(adata.X,axis=0)
+    b = np.sum(adata.X,axis=1)
+    adata.X = adata.X / b
+    adata.X = adata.X / a
+    adata.X = np.log(1 + 1e4 * adata.X.shape[0] * adata.X)
+    adata.X = scipy.sparse.csr_matrix(adata.X)
+    return adata
 
 def maxmin_scale(adata):
     if issparse(adata.X):
@@ -275,7 +285,50 @@ def maxmin_scale(adata):
     if not issparse(adata.X):
         adata.X = scipy.sparse.csr_matrix(adata.X)
     return adata
+
+
+class BatchSampler(Sampler):
+    def __init__(self, batch_size, batch_id, drop_last=False):
+        """
+        create a BatchSampler object
         
+        Parameters
+        ----------
+        batch_size
+            batch size for each sampling
+        batch_id
+            batch id of all samples
+        drop_last
+            drop the last samples that not up to one batch
+            
+        """
+        self.batch_size = batch_size
+        self.drop_last = drop_last
+        self.batch_id = batch_id
+
+    def __iter__(self):
+        batch = {}
+        sampler = np.random.permutation(len(self.batch_id))
+        for idx in sampler:
+            c = self.batch_id[idx]
+            if c not in batch:
+                batch[c] = []
+            batch[c].append(idx)
+
+            if len(batch[c]) == self.batch_size:
+                yield batch[c]
+                batch[c] = []
+
+        for c in batch.keys():
+            if len(batch[c]) > 0 and not self.drop_last:
+                yield batch[c]
+            
+    def __len__(self):
+        if self.drop_last:
+            return len(self.batch_id) // self.batch_size
+        else:
+            return (len(self.batch_id)+self.batch_size-1) // self.batch_size
+    
     
 class SingleCellDataset(Dataset):
     """
@@ -301,5 +354,4 @@ class SingleCellDataset(Dataset):
         batch_id = self.adata.obs['batch'].cat.codes[idx]
         celltype_id = self.adata.obs['test_type'].cat.codes[idx]
         return x, batch_id, celltype_id, idx
-
 
