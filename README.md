@@ -10,7 +10,7 @@ Running CASTLE on CUDA is recommended if available.
     pip install castle
 
 ## Tutorial
-We also provide a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/demo.ipynb) for the training, evaluation, visualization and feature spectrum of CASTLE.
+We provide a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/demo.ipynb) for the training, evaluation, visualization and feature spectrum of CASTLE, and a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/prepare_data.ipynb) for the preparation of h5ad-formatted file.
 
 ### Input   
 * h5ad file
@@ -80,7 +80,7 @@ optional arguments:
 		Verbosity, True or False. Default: False.
 ```
 
-### output   
+### Output   
 Output will be saved in the output folder including:
 * **checkpoint/config.pt** and **checkpoint/model.pt**:  saved model to reproduce results.
 * **adata.h5ad**:  saved data including latent embeddings, clustering assignments and UMAP results.
