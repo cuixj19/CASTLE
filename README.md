@@ -64,8 +64,8 @@ $ python CASTLE.py -d input_file -o output_dir --reference 2 --target_name batch
 		The size of codebook. Default: 400.
 	--split
 		The number of split quantizations. Default: 10.
-	--ema
-		If True, adopt the exponential moving average (EMA) to update the codebook instead of the codebook loss. Default: True.
+	--no_ema
+		If False, adopt the exponential moving average (EMA) to update the codebook instead of the codebook loss. Default: False.
 	--commitment_cost
 		The weight of commitment loss designed for encoder. Default: 0.25.
 	--decay
