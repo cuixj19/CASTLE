@@ -17,11 +17,29 @@ We provide a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/
 * **count matrix file**:  
 	* row is peak and column is barcode, in **txt** / **tsv** (sep=**"\t"**) or **csv** (sep=**","**) format
 
-### Run   
+### Run and reproduce   
+**Use 'CASTLE.py' to reproduce the results of CASTLE and apply CASTLE to users' own dataset.**  
 ```  
 $ python CASTLE.py -d input_file -o output_dir
+```
 
-optional arguments:
+Use '--batch_name', '--batch_loss_weight' and '--batch_loss_ratio' for dataset with multiple batches.
+```  
+$ python CASTLE.py -d input_file -o output_dir --batch_name batch --batch_loss_weight 0.001 --batch_loss_ratio 0.1
+```
+
+Use '--reference' and '--target_name' for dataset with unlabeled reference dataset, assuming 'batch1' is the target data.
+```  
+$ python CASTLE.py -d input_file -o output_dir --reference 1 --target_name batch1
+```
+
+Use '--cell_loss_weight', '--cell_loss_ratio' and '--clf_loss_weight' for dataset with labeled reference dataset.
+```  
+$ python CASTLE.py -d input_file -o output_dir --reference 2 --target_name batch1 --cell_loss_weight 0.001 --cell_loss_ratio 0.1 --clf_loss_weight 1.0
+```
+
+**Optional arguments:**
+```  
 	--data_list, -d
 		A path list of AnnData matrices to concatenate with.
 	--join
