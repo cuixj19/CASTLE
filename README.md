@@ -18,6 +18,7 @@ We provide a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/
 	* row is peak and column is barcode, in **txt** / **tsv** (sep=**"\t"**) or **csv** (sep=**","**) format
 
 ### Run and reproduce   
+Use 'CASTLE_reproduce.py' to reproduce the results of CASTLE on benchmark datasets in our manuscript.  
 **Use 'CASTLE.py' to reproduce the results of CASTLE and apply CASTLE to users' own dataset.**  
 ```  
 $ python CASTLE.py -d input_file -o output_dir
