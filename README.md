@@ -7,7 +7,7 @@
 CASTLE neural network is implemented in [Pytorch](https://pytorch.org/) framework.  
 Running CASTLE on CUDA is recommended if available.   
 
-    pip install castle
+    pip install sccastle
 
 ## Tutorial
 We provide a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/demo.ipynb) for the training, evaluation, visualization and feature spectrum of CASTLE, and a [quick-start notebook](https://github.com/cuixj19/CASTLE/blob/main/prepare_data.ipynb) for the preparation of h5ad-formatted file.
