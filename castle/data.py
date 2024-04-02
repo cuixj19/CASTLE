@@ -235,7 +235,7 @@ def preprocessing(
     sc.pp.filter_genes(adata, min_cells=min_cells_)
 
     if log: log.info('Calculating TF-IDF')
-    adata = cal_tfidf(adata)
+    adata = cal_tfidf1(adata)
     
     if log: log.info('Normalizing total per cell')
     sc.pp.normalize_total(adata)
