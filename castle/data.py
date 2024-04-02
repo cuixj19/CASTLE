@@ -249,6 +249,7 @@ def preprocessing(
 
 # Perform Signac TF-IDF (count_mat: cell*peak)
 def cal_tfidf(adata, chunk_size=10000):
+    adata.X = adata.X.todense()
     a = np.sum(adata.X,axis=0)
     b = np.sum(adata.X,axis=1)
     adata.X = adata.X / b
@@ -268,6 +269,7 @@ def cal_tfidf(adata, chunk_size=10000):
     return adata
 
 def cal_tfidf1(adata):
+    adata.X = adata.X.todense()
     a = np.sum(adata.X,axis=0)
     b = np.sum(adata.X,axis=1)
     adata.X = adata.X / b
