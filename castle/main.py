@@ -182,6 +182,9 @@ def CASTLE(
     adata.obsm['latent'], adata.obsm['feature_index'] = model.encodeBatch(testloader, device=device)
     log.info('Output dir: {}'.format(outdir))
     # adata.write(outdir+'adata.h5ad')
+    adata1 = adata[:, :latent_dim].copy()
+    adata1.X = adata1.obsm['latent'].copy()
+    adata1.write(outdir+'adata.h5ad')
     
     if not ignore_umap:
         if reference != 0:
