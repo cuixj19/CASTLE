@@ -1,4 +1,4 @@
-# single-cell Chromatin Accessibility Sequencing data analysis via discreTe Latent Embedding
+# [single-cell Chromatin Accessibility Sequencing data analysis via discreTe Latent Embedding](https://www.nature.com/articles/s43588-024-00625-4)
 
 ![](docs/CASTLE.png)
 
@@ -105,5 +105,11 @@ Output will be saved in the output folder including:
 * **adata.h5ad**:  saved data including latent embeddings, clustering assignments and UMAP results.
 * **results.csv**:  saved performance evaluation of clustering assignments and ground-truth cell type labels.
 
+
+## Citation
+[Xuejian Cui, Xiaoyang Chen, Zhen Li, Zijing Gao, Shengquan Chen & Rui Jiang. Discrete latent embedding of single-cell chromatin accessibility sequencing data for uncovering cell heterogeneity. Nature Computational Science, (2024).](https://www.nature.com/articles/s43588-024-00625-4)
+
+
 ## Contact 
 If you have any questions, you can contact me from the email: <cuixj19@mails.tsinghua.edu.cn>
+
